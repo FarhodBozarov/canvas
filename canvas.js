@@ -1,30 +1,32 @@
 const yuza = document.querySelector("canvas");
-yuza.width = 1200;
-yuza.height = 600;
+const WIDTH = 1200;
+const HEIGHT = 600;
+yuza.width = WIDTH;
+yuza.height = HEIGHT;
 
 const ctx = yuza.getContext("2d");
 
 ctx.fillStyle = "#021B30";
-ctx.fillRect(0, 0, 1200, 600);
+ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
 ctx.lineWidth = 2;
 ctx.strokeStyle = "#91979C";
-ctx.moveTo(50, 550);
-ctx.lineTo(975, 550);
-ctx.moveTo(50, 550);
-ctx.lineTo(50, 15);
+ctx.moveTo(WIDTH / 24, HEIGHT - HEIGHT / 12);
+ctx.lineTo(WIDTH - WIDTH / 5, HEIGHT - HEIGHT / 12);
+ctx.moveTo(WIDTH / 24, HEIGHT - HEIGHT / 12);
+ctx.lineTo(WIDTH / 24, HEIGHT - (HEIGHT / 1.2 + HEIGHT / 8));
 ctx.stroke();
 
 ctx.lineWidth = 0.3;
 for (let i = 0; i < 5; i++) {
-  ctx.moveTo(50, (i + 1) * 100 - 75);
-  ctx.lineTo(975, (i + 1) * 100 - 75);
+  ctx.moveTo(WIDTH / 24, (i + 1) * (HEIGHT / 6) - HEIGHT / 8);
+  ctx.lineTo(WIDTH - WIDTH / 5, (i + 1) * (HEIGHT / 6) - HEIGHT / 8);
 }
 ctx.stroke();
 
 function massivlar(massiv) {
   for (let i = 1; i <= 12; i++) {
-    massiv.push(Math.round(Math.random() * 500));
+    massiv.push(Math.round(Math.random() * ((HEIGHT / 6) * 5)));
   }
 }
 let massiv = [],
@@ -63,8 +65,14 @@ function createChart(arr, color) {
   ctx.lineWidth = 1.5;
   ctx.strokeStyle = color;
   for (let i = 1; i <= 12; i++) {
-    ctx.lineTo(i * 75 + 50, 525 - arr[i - 1]);
-    ctx.moveTo(i * 75 + 50, 525 - arr[i - 1]);
+    ctx.lineTo(
+      i * (WIDTH / 16) + WIDTH / 24,
+      HEIGHT / 1.2 + HEIGHT / 24 - arr[i - 1]
+    );
+    ctx.moveTo(
+      i * (WIDTH / 16) + WIDTH / 24,
+      HEIGHT / 1.2 + HEIGHT / 24 - arr[i - 1]
+    );
   }
   ctx.stroke();
 }
@@ -90,9 +98,13 @@ let labels = [
 let label = ["500", "400", "300", "200", "100"];
 
 for (let i = 0; i < label.length; i++) {
-  ctx.strokeText(label[i], 30, i * 100 + 28);
+  ctx.strokeText(label[i], WIDTH / 40, i * (HEIGHT / 6) + HEIGHT / 21.5);
 }
 
 for (let i = 0; i < labels.length; i++) {
-  ctx.strokeText(labels[i], i * 75 + 100, 562);
+  ctx.strokeText(
+    labels[i],
+    i * (WIDTH / 16) + WIDTH / 12,
+    (HEIGHT / 6) * 5 + HEIGHT / 10
+  );
 }
